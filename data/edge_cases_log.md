@@ -1,0 +1,171 @@
+# Extraction edge-case log
+
+Append-only log of exam-layout patterns the extraction scripts could not confidently resolve on their own. Each run appends a timestamped section; entries are a worklist for manual review, not noise -- if a pattern recurs often enough, teach the script to handle it instead of re-reviewing it by hand each time.
+
+## 2026-10-12 16:16:42 -- [solutions] local [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022], national-I - -> assets/images/local
+
+- 2010-solutions.pdf: SPLIT ACROSS PAGES: q13's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._13_solution_1.png .. _2.png), in reading order.
+- 2010-solutions.pdf: SPLIT ACROSS PAGES: q20's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._20_solution_1.png .. _2.png), in reading order.
+- 2010-solutions.pdf: SPLIT ACROSS PAGES: q34's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._34_solution_1.png .. _2.png), in reading order.
+- 2010-solutions.pdf: SPLIT ACROSS PAGES: q38's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._38_solution_1.png .. _2.png), in reading order.
+- 2011-solutions.pdf: SPLIT ACROSS PAGES: q6's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._6_solution_1.png .. _2.png), in reading order.
+- 2011-solutions.pdf: SPLIT ACROSS PAGES: q55's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._55_solution_1.png .. _2.png), in reading order.
+- 2012-solutions.pdf: SPLIT ACROSS PAGES: q6's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._6_solution_1.png .. _2.png), in reading order.
+- 2012-solutions.pdf: SPLIT ACROSS PAGES: q12's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._12_solution_1.png .. _2.png), in reading order.
+- 2012-solutions.pdf: SPLIT ACROSS PAGES: q35's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._35_solution_1.png .. _2.png), in reading order.
+- 2012-solutions.pdf: SPLIT ACROSS PAGES: q51's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._51_solution_1.png .. _2.png), in reading order.
+- 2013-solutions.pdf: SPLIT ACROSS PAGES: q5's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._5_solution_1.png .. _2.png), in reading order.
+- 2013-solutions.pdf: SPLIT ACROSS PAGES: q20's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._20_solution_1.png .. _2.png), in reading order.
+- 2013-solutions.pdf: SPLIT ACROSS PAGES: q27's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._27_solution_1.png .. _2.png), in reading order.
+- 2013-solutions.pdf: SPLIT ACROSS PAGES: q33's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._33_solution_1.png .. _2.png), in reading order.
+- 2013-solutions.pdf: SPLIT ACROSS PAGES: q43's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._43_solution_1.png .. _2.png), in reading order.
+- 2014-solutions.pdf: SPLIT ACROSS PAGES: q14's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._14_solution_1.png .. _2.png), in reading order.
+- 2014-solutions.pdf: SPLIT ACROSS PAGES: q29's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._29_solution_1.png .. _2.png), in reading order.
+- 2015-solutions.pdf: SPLIT ACROSS PAGES: q3's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._3_solution_1.png .. _2.png), in reading order.
+- 2015-solutions.pdf: SPLIT ACROSS PAGES: q12's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._12_solution_1.png .. _2.png), in reading order.
+- 2015-solutions.pdf: SPLIT ACROSS PAGES: q40's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._40_solution_1.png .. _2.png), in reading order.
+- 2015-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2015-solutions.pdf: SPLIT ACROSS PAGES: q48's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._48_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q4's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._4_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q50's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._50_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q9's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._9_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q22's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._22_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q27's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._27_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q33's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._33_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q46's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._46_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=2 on page 10 is behind the current sequence (expected q40 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q29's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._29_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q36's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._36_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q54's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._54_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q3's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._3_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q13's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._13_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q53's solution runs from page 11 to page 12 -- saved as 2 indexed piece(s) (..._53_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q58's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._58_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q3's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._3_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q30's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._30_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q34's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._34_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q37's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._37_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q3's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._3_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q8's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._8_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q16's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._16_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q20's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._20_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q28's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._28_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q32's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._32_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q35's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._35_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q38's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._38_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 11 to page 12 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q45's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._45_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q49's solution runs from page 13 to page 14 -- saved as 2 indexed piece(s) (..._49_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q52's solution runs from page 14 to page 15 -- saved as 2 indexed piece(s) (..._52_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q55's solution runs from page 15 to page 16 -- saved as 2 indexed piece(s) (..._55_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 16 to page 17 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q60's solution runs from page 17 to page 18 -- saved as 2 indexed piece(s) (..._60_solution_1.png .. _2.png), in reading order.
+
+## 2026-10-12 16:16:51 -- [solutions] local -, national-I [1999, 2000, 2001, 2002, 2003, 2016, 2017, 2018, 2019, 2020, 2021, 2022] -> assets/images/national-I
+
+- 1999-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=1 on page 4 is behind the current sequence (expected q23 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 1999-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=2 on page 4 is behind the current sequence (expected q23 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 1999-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=3 on page 4 is behind the current sequence (expected q23 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 1999-solutions.pdf: SPLIT ACROSS PAGES: q3's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._3_solution_1.png .. _2.png), in reading order.
+- 1999-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 1999-solutions.pdf: SPLIT ACROSS PAGES: q30's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._30_solution_1.png .. _2.png), in reading order.
+- 1999-solutions.pdf: SPLIT ACROSS PAGES: q39's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._39_solution_1.png .. _2.png), in reading order.
+- 2000-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 2000-solutions.pdf: SPLIT ACROSS PAGES: q16's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._16_solution_1.png .. _2.png), in reading order.
+- 2001-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2002-solutions.pdf: SPLIT ACROSS PAGES: q12's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._12_solution_1.png .. _2.png), in reading order.
+- 2002-solutions.pdf: SPLIT ACROSS PAGES: q28's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._28_solution_1.png .. _2.png), in reading order.
+- 2002-solutions.pdf: SPLIT ACROSS PAGES: q45's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._45_solution_1.png .. _2.png), in reading order.
+- 2003-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2003-solutions.pdf: SPLIT ACROSS PAGES: q54's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._54_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q34's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._34_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2016-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q10's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._10_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q23's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._23_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q28's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._28_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q31's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._31_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q44's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._44_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q49's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._49_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2017-solutions.pdf: SPLIT ACROSS PAGES: q60's solution runs from page 13 to page 14 -- saved as 2 indexed piece(s) (..._60_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q4's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._4_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q7's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._7_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q25's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._25_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q37's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._37_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q55's solution runs from page 15 to page 16 -- saved as 2 indexed piece(s) (..._55_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q56's solution runs from page 16 to page 17 -- saved as 2 indexed piece(s) (..._56_solution_1.png .. _2.png), in reading order.
+- 2018-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 17 to page 18 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q7's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._7_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q11's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._11_solution_1.png .. _2.png), in reading order.
+- 2019-solutions.pdf: SPLIT ACROSS PAGES: q50's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._50_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q14's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._14_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q37's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._37_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q43's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._43_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q48's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._48_solution_1.png .. _2.png), in reading order.
+- 2020-solutions.pdf: SPLIT ACROSS PAGES: q54's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._54_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=24 on page 9 is behind the current sequence (expected q29 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q4's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._4_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q7's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._7_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q11's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._11_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q12's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._12_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q16's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._16_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q20's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._20_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q27's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._27_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q29's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._29_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q31's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._31_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q34's solution runs from page 11 to page 12 -- saved as 2 indexed piece(s) (..._34_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q35's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._35_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q36's solution runs from page 13 to page 14 -- saved as 2 indexed piece(s) (..._36_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q38's solution runs from page 14 to page 15 -- saved as 2 indexed piece(s) (..._38_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 15 to page 16 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q46's solution runs from page 16 to page 17 -- saved as 2 indexed piece(s) (..._46_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q49's solution runs from page 17 to page 18 -- saved as 2 indexed piece(s) (..._49_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q51's solution runs from page 18 to page 19 -- saved as 2 indexed piece(s) (..._51_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q53's solution runs from page 19 to page 20 -- saved as 2 indexed piece(s) (..._53_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q56's solution runs from page 20 to page 21 -- saved as 2 indexed piece(s) (..._56_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 21 to page 22 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2021-solutions.pdf: SPLIT ACROSS PAGES: q58's solution runs from page 22 to page 23 -- saved as 2 indexed piece(s) (..._58_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=1 on page 9 is behind the current sequence (expected q23 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2022-solutions.pdf: GAP IN SEQUENCE: expected q44 next but found q45 on page 18 -- treated as a legitimately skipped/voided question (e.g. ACS removed it) rather than a detection miss; nothing saved for q44..q44.
+- 2022-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=1 on page 23 is behind the current sequence (expected q56 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2022-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=2 on page 23 is behind the current sequence (expected q56 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2022-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=3 on page 23 is behind the current sequence (expected q56 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2022-solutions.pdf: SKIPPED NON-SEQUENTIAL MATCH: a line matching the question-number pattern with num=4 on page 23 is behind the current sequence (expected q56 or higher) -- treated as a numbered sub-list inside an explanation, not a new question, and excluded from segmentation.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q2's solution runs from page 1 to page 2 -- saved as 2 indexed piece(s) (..._2_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q5's solution runs from page 2 to page 3 -- saved as 2 indexed piece(s) (..._5_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q9's solution runs from page 3 to page 4 -- saved as 2 indexed piece(s) (..._9_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q12's solution runs from page 4 to page 5 -- saved as 2 indexed piece(s) (..._12_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q14's solution runs from page 5 to page 6 -- saved as 2 indexed piece(s) (..._14_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q16's solution runs from page 6 to page 7 -- saved as 2 indexed piece(s) (..._16_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q17's solution runs from page 7 to page 8 -- saved as 2 indexed piece(s) (..._17_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q19's solution runs from page 8 to page 9 -- saved as 2 indexed piece(s) (..._19_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q22's solution runs from page 9 to page 10 -- saved as 2 indexed piece(s) (..._22_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q24's solution runs from page 10 to page 11 -- saved as 2 indexed piece(s) (..._24_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q27's solution runs from page 11 to page 12 -- saved as 2 indexed piece(s) (..._27_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q29's solution runs from page 12 to page 13 -- saved as 2 indexed piece(s) (..._29_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q30's solution runs from page 13 to page 14 -- saved as 2 indexed piece(s) (..._30_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q32's solution runs from page 14 to page 15 -- saved as 2 indexed piece(s) (..._32_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q35's solution runs from page 15 to page 16 -- saved as 2 indexed piece(s) (..._35_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q39's solution runs from page 16 to page 17 -- saved as 2 indexed piece(s) (..._39_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q42's solution runs from page 17 to page 18 -- saved as 2 indexed piece(s) (..._42_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q46's solution runs from page 18 to page 19 -- saved as 2 indexed piece(s) (..._46_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q47's solution runs from page 19 to page 20 -- saved as 2 indexed piece(s) (..._47_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q49's solution runs from page 20 to page 21 -- saved as 2 indexed piece(s) (..._49_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q51's solution runs from page 21 to page 22 -- saved as 2 indexed piece(s) (..._51_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q54's solution runs from page 22 to page 23 -- saved as 2 indexed piece(s) (..._54_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q55's solution runs from page 23 to page 24 -- saved as 2 indexed piece(s) (..._55_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q57's solution runs from page 24 to page 25 -- saved as 2 indexed piece(s) (..._57_solution_1.png .. _2.png), in reading order.
+- 2022-solutions.pdf: SPLIT ACROSS PAGES: q58's solution runs from page 25 to page 26 -- saved as 2 indexed piece(s) (..._58_solution_1.png .. _2.png), in reading order.
+

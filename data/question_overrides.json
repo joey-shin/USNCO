@@ -1,0 +1,22 @@
+{
+  "2007_local_4": {
+    "question": "An experiment is carried out to determine the molar mass of a compound by the freezing point depression method using the equation\n\\[\n\\text{MM} = 7.05 \\times \\frac{\\text{mass solute}}{\\Delta T \\times \\text{kg solvent}}\n\\]\nThe data below are collected:\n\\[\n\\begin{array}{ll}\n\\text{Mass of empty test tube} & 42.0\\text{ g} \\\\\n\\text{Mass of test tube and solvent} & 73.6\\text{ g} \\\\\n\\text{Mass of solute dissolved in solvent} & 2.000\\text{ g} \\\\\n\\text{Freezing point of pure solvent} & 78.1\\,^\\circ\\mathrm{C} \\\\\n\\text{Freezing point of solution} & 77.6\\,^\\circ\\mathrm{C}\n\\end{array}\n\\]\nHow many significant figures can be reported for the molar mass of the solute?"
+  },
+  "2009_local_21": {
+    "question": "\\begin{align*}\n\\ce{NO(g) &-> 1/2 N2(g) + 1/2 O2(g)} & \\Delta H_1^\\circ \\\\\n\\ce{2 NO(g) &-> N2O(g) + 1/2 O2(g)}  & \\Delta H_2^\\circ\n\\end{align*}\nWhich relationship is correct?"
+  },
+  "2003_national-I_22": {
+    "question": "For the reaction: \\ce{2 NO2(g) -> N2O4(g)}, $\\Delta H^\\circ < 0$ (or $\\Delta H < 0$). What predictions can be made about the sign of $\\Delta S$ and the temperature conditions under which the reaction would be spontaneous?"
+  },
+  "2020_national-I_24": {
+    "question": "The plot of the natural logarithm of the molar solubility ($S$) of \\ce{Ag2SO4} as a function of the reciprocal of the absolute temperature is shown below.\n\nWhat is $\\Delta H^\\circ_{\\mathrm{rxn}}$ for the following reaction?\n\\[ \\ce{Ag2SO4(s) -> 2 Ag+(aq) + SO4^2-(aq)} \\]"
+  },
+  "2022_national-I_40": {
+    "question": "Which statements about the following cell are correct?\n\n\\begin{center}\n\\ce{Zn(s) + 2 AgI(s) -> Zn^2+(aq) + 2 Ag(s) + 2 I-(aq)}\n\n\\vspace{0.5em}\n\n\\begin{tabular}{lcc}\n\\hline\n\\textbf{Species} & $\\Delta H_f^\\circ\\text{ / kJ}\\cdot\\text{mol}^{-1}$ & $S^\\circ\\text{ / J}\\cdot\\text{mol}^{-1}\\cdot\\text{K}^{-1}$ \\\\\n\\hline\n\\ce{Zn(s)}       & $0$       & $41.6$  \\\\\n\\ce{AgI(s)}      & $-61.84$  & $115.5$ \\\\\n\\ce{Zn^2+(aq)}   & $-153.89$ & $-112.1$ \\\\\n\\ce{Ag(s)}       & $0$       & $42.6$  \\\\\n\\ce{I-(aq)}      & $-55.19$  & $111.3$ \\\\\n\\hline\n\\end{tabular}\n\\end{center}\n\n\\begin{enumerate}\n  \\item The standard cell potential at 298~K is 0.54~V.\n  \\item The cell potential increases with increasing temperature.\n\\end{enumerate}"
+  },
+  "2004_national-I_18": {
+    "choices": {
+      "D": "Highest: face-centered cubix; Lowest: body-centered cubic"
+    }
+  }
+}

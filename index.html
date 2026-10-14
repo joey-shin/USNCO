@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USNCO Practice</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #ffffff;
+    --border: #d9d9d9;
+    --text: #1d1d1b;
+    --muted: #6b6b66;
+    --hover: #f1f1f1;
+    --selected: #e2e2e2;
+    --accent: #2f6fd6;
+    --accent-bg: #dce8fb;
+    --header-h: 60px;
+    --ctl-h: 32px;                /* shared height for filter tiles and dropdown rows */
+    --ctl-fs: 14px;               /* shared font size for filter tiles and dropdown rows */
+    --sidebar-w: 20vw;            /* ~20% of window */
+    --pane-w: calc(80vw * 0.6);   /* ~60% of the remaining 80% = ~48% of window */
+  }
+  /* Dark: follows the system until the header toggle picks a theme explicitly */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #2b2b2b;
+      --panel: #333333;
+      --border: #555555;
+      --text: #ececec;
+      --muted: #a0a0a0;
+      --hover: #3c3c3c;
+      --selected: #4a4a4a;
+      --accent: #6aa4ff;
+      --accent-bg: #2c3f5e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #2b2b2b;
+    --panel: #333333;
+    --border: #555555;
+    --text: #ececec;
+    --muted: #a0a0a0;
+    --hover: #3c3c3c;
+    --selected: #4a4a4a;
+    --accent: #6aa4ff;
+    --accent-bg: #2c3f5e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  button { font: inherit; color: var(--text); }
+
+  header {
+    position: sticky; top: 0; z-index: 20;
+    height: var(--header-h); display: flex; align-items: center; gap: 12px; padding: 0 20px;
+    background: var(--panel); border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 18px; margin: 0 16px 0 0; font-weight: 600; white-space: nowrap; }
+
+  /* Filter tiles + dropdown panels (panels overlay the panes below) */
+  .filter { position: relative; }
+  .filter > .tile {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    height: var(--ctl-h); min-width: 130px; padding: 0 10px; font-size: var(--ctl-fs);
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;
+  }
+  .filter > .tile:hover { background: var(--hover); }
+  .filter .count { color: var(--muted); font-size: 12px; margin-left: auto; }
+  .chev { display: inline-block; width: 10px; transition: transform .15s; }
+  .filter.open > .tile { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .filter.open > .tile .chev { transform: rotate(90deg); }
+  .panel {
+    display: none; position: absolute; top: calc(var(--ctl-h) - 1px); left: 0; z-index: 30;
+    min-width: 100%; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 0 4px 4px 4px; box-shadow: 0 8px 24px rgba(0,0,0,.18); font-size: var(--ctl-fs);
+  }
+  .filter.open .panel { display: block; }
+  .opt {
+    display: flex; align-items: center; width: 100%; height: var(--ctl-h); padding: 0 10px;
+    font-size: var(--ctl-fs); text-align: left; white-space: nowrap; cursor: pointer;
+    background: transparent; border: 0; border-top: 1px solid var(--border);
+  }
+  .opt:first-child { border-top: 0; }
+  .opt:hover { background: var(--hover); }
+  .opt::before { content: ""; flex: 0 0 14px; height: 14px; margin-right: 8px;
+    border: 1.5px solid var(--muted); border-radius: 3px; }
+  .opt.on { background: var(--accent-bg); font-weight: 600; }
+  .opt.on::before { content: "✓"; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: #fff; background: var(--accent); border-color: var(--accent); }
+  .opt:disabled { color: var(--muted); cursor: default; background: transparent; font-weight: 400; }
+  .panel-actions { display: flex; gap: 6px; align-items: center; height: var(--ctl-h); padding: 0 10px;
+    border-bottom: 1px solid var(--border); }
+  .panel-actions button { font-size: 12px; padding: 2px 8px; cursor: pointer; background: transparent;
+    border: 1px solid var(--border); border-radius: 4px; }
+  .panel-actions button:hover { background: var(--hover); }
+  .banner { width: var(--pane-w); margin: 10vh auto 0; padding: 16px; border: 1px solid var(--border);
+    border-radius: 6px; background: var(--panel); }
+  .banner code { background: var(--bg); padding: 1px 5px; border-radius: 3px; }
+  #f-topic .panel { width: 280px; }
+
+  .year-select {
+    display: flex; align-items: center; gap: 6px; height: calc(var(--ctl-h) + 8px); padding: 0 10px;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+  }
+  .year-select input {
+    width: 64px; height: 24px; padding: 0 6px; font: inherit; font-size: var(--ctl-fs);
+    background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 3px;
+  }
+  .year-grid { display: grid; grid-template-columns: repeat(3, 1fr); width: 270px;
+    max-height: calc(var(--ctl-h) * 6); overflow-y: auto; }
+  .year-grid .opt { justify-content: center; border-left: 1px solid var(--border); }
+  .year-grid .opt::before { display: none; }
+  .year-grid .opt.on { color: var(--accent); }
+  .year-grid .opt:nth-child(3n+1) { border-left: 0; }
+  .year-grid .opt:nth-child(-n+3) { border-top: 0; }
+
+  #theme-btn { margin-left: auto; height: var(--ctl-h); padding: 0 12px; font-size: var(--ctl-fs);
+    cursor: pointer; background: var(--panel); border: 1px solid var(--border); border-radius: 4px; }
+  #theme-btn:hover { background: var(--hover); }
+  #f-view .panel { width: 200px; }
+
+  /* Kebab menus (per question tile) */
+  .menu { position: relative; }
+  .menu > button { font-size: 20px; line-height: 1; width: 28px; height: 28px; cursor: pointer;
+    background: transparent; border: 0; border-radius: 4px; }
+  .menu > button:hover { background: var(--hover); }
+  .menu-list { display: none; position: absolute; top: 30px; z-index: 30; min-width: 220px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.2); padding: 4px 0; }
+  .menu.open .menu-list { display: block; }
+  .menu-group { padding: 6px 12px 2px; font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .04em; }
+  .menu-list button { display: block; width: 100%; padding: 6px 12px; text-align: left; cursor: pointer;
+    font-size: 13px; background: transparent; border: 0; }
+  .menu-list button:hover { background: var(--hover); }
+  .menu-list .path { display: block; font-size: 11px; color: var(--muted); }
+
+  .layout { display: flex; }
+
+  /* Sidebar: fixed width, independently scrollable */
+  nav {
+    position: sticky; top: var(--header-h);
+    width: var(--sidebar-w); flex: 0 0 var(--sidebar-w);
+    height: calc(100vh - var(--header-h)); overflow-y: auto;
+    background: var(--panel); border-right: 1px solid var(--border);
+  }
+  .nav-tools { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between;
+    padding: 6px 8px; background: var(--panel); border-bottom: 1px solid var(--border); }
+  .nav-tools button { font-size: 12px; padding: 2px 8px; cursor: pointer;
+    background: transparent; border: 1px solid var(--border); border-radius: 4px; }
+  .nav-tools button:hover { background: var(--hover); }
+  .nav-tools button:disabled { color: var(--muted); cursor: default; background: transparent; }
+  .exam { border-bottom: 1px solid var(--border); }
+  .exam-head, .topic-head { display: flex; align-items: center; gap: 8px; width: 100%;
+    text-align: left; cursor: pointer; background: transparent; border: 0; }
+  .exam-head { padding: 10px 12px; font-weight: 600; font-size: 15px; }
+  .exam-head:hover, .topic-head:hover { background: var(--hover); }
+  .open > .exam-head .chev, .open > .topic-head .chev { transform: rotate(90deg); }
+  .exam-body { display: none; }
+  .exam.open > .exam-body { display: block; }
+  .empty-nav { padding: 16px 12px; color: var(--muted); font-style: italic; }
+
+  /* Scrolling view */
+  .problems { list-style: none; margin: 0; padding: 0; }
+  .problems li { display: flex; justify-content: space-between; padding: 5px 12px 5px 28px;
+    cursor: pointer; border-top: 1px solid var(--border); font-size: 13px; }
+  .problems li:hover { background: var(--hover); }
+  .problems li.selected { background: var(--selected); font-weight: 600; }
+  .problems li.selected::after { content: "›"; }
+  .problems.flat li { padding-left: 12px; }
+  .problems.flat li:first-child { border-top: 0; }
+
+  /* Chronological view: exam card > topic cards > number grid in rows of six */
+  .topic { border-top: 1px solid var(--border); }
+  .topic-head { padding: 6px 12px 6px 22px; font-size: 13px; }
+  .topic-head.has-selected { background: var(--selected); font-weight: 600; }
+  .topic-head .chev { box-sizing: content-box; padding: 4px 6px; margin: -4px -6px; border-radius: 3px; }
+  .topic-head .chev:hover { background: var(--selected); }
+  .grid { display: none; grid-template-columns: repeat(6, 1fr); padding: 2px 12px 6px 22px; }
+  .topic.open > .grid { display: grid; }
+  .grid button { height: 26px; font-size: 13px; cursor: pointer; background: transparent;
+    border: 0; border-radius: 3px; }
+  .grid button:hover { background: var(--hover); }
+  .grid button.selected { background: var(--selected); font-weight: 600; }
+  /* Scrolling (order) view: exam card > loaded problem numbers in rows of six, no topics */
+  .grid.nums { display: grid; border-top: 1px solid var(--border); padding-top: 6px; }
+
+  /* Main area: page scrolls; pane width fixed, height follows content */
+  main { flex: 1; padding: 24px 0 48px; }
+  .pane-wrap { position: relative; width: var(--pane-w); margin: 0 auto; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px;
+    padding: 16px; margin-bottom: 20px; }
+  .card h2 { font-size: 13px; margin: 0 0 10px; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: .04em; }
+  .card img { display: block; width: 100%; height: auto; background: #fff;
+    border: 1px solid var(--border); border-radius: 4px; }
+  .card img + img, .q-img + .q-img, .solution img + img { margin-top: 12px; }
+
+  /* Answer choice overlays: positioned in % of the image so they scale with it */
+  .q-img { position: relative; }
+  .choice { position: absolute; padding: 0; cursor: pointer; border-radius: 3px;
+    background: transparent; border: 1.5px solid rgba(110, 110, 110, .55); }
+  .choice:hover { background: rgba(47, 111, 214, .12); border-color: rgba(47, 111, 214, .6); }
+  .choice.picked { border-color: #6b6b66; background: rgba(110, 110, 110, .30); }
+  .choice.wrong { cursor: default; border-color: #d33c3c; background: rgba(211, 60, 60, .30); }
+  .choice.right { cursor: default; border-color: #2e9e4f; background: rgba(46, 158, 79, .32); }
+  .locked .choice:not(.right):not(.wrong) { cursor: default; background: transparent; }
+  .fallback-choices { display: flex; gap: 8px; margin-top: 10px; }
+  .fallback-choices .choice { position: static; height: var(--ctl-h); min-width: 48px; color: var(--text);
+    font-size: var(--ctl-fs); }
+
+  .answer-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    gap: 12px; margin-top: 14px; }
+  .answer-row button { height: var(--ctl-h); padding: 0 14px; font-size: var(--ctl-fs); cursor: pointer;
+    background: transparent; border: 1px solid var(--border); border-radius: 4px; }
+  .answer-row button:hover { background: var(--hover); }
+  .answer-row .solution-btn { justify-self: start; }
+  .answer-row .solution-btn.active { background: var(--selected); font-weight: 600; }
+  .answer-row .solution-btn:disabled { color: var(--muted); cursor: default; background: transparent; }
+  .answer-row .submit-btn { justify-self: end; }
+  .status { font-size: var(--ctl-fs); font-weight: 600; text-align: center; }
+  .status.correct { color: #2e9e4f; }
+  .status.incorrect { color: #d33c3c; }
+  .status.prompt { color: var(--muted); }
+  .identity { margin-top: 10px; text-align: right; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .solution { margin-top: 14px; padding: 12px; border: 1px solid var(--border); border-radius: 6px; }
+  .empty { color: var(--muted); font-style: italic; }
+  .placeholder { color: var(--muted); text-align: center; margin-top: 20vh; }
+  .q-tile { position: relative; scroll-margin-top: calc(var(--header-h) + 16px); }
+  .q-tile.current > .card { border-color: var(--accent); }
+  .load-more { display: flex; justify-content: center; margin: 4px 0 24px; }
+  .load-more button { height: var(--ctl-h); padding: 0 16px; font-size: var(--ctl-fs); cursor: pointer;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 4px; }
+  .load-more button:hover { background: var(--hover); }
+  .q-tile > .menu { position: absolute; top: 0; left: calc(100% + 8px); }
+  .q-tile .menu-list { left: 0; min-width: 280px; }
+
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: #222; color: #fff; padding: 8px 14px; border-radius: 6px; font-size: 13px;
+    opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 40; }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>USNCO Practice</h1>
+
+  <div class="filter" id="f-type">
+    <button class="tile">Exam Type <span class="count"></span><span class="chev">›</span></button>
+    <div class="panel"><div class="panel-actions"><button data-all="types">All</button><button data-none="types">None</button></div><div id="type-panel"></div></div>
+  </div>
+
+  <div class="filter" id="f-year">
+    <button class="tile">Year <span class="count"></span><span class="chev">›</span></button>
+    <div class="panel">
+      <div class="year-select">
+        Select:
+        <input id="year-from" type="number" inputmode="numeric" placeholder="from">
+        –
+        <input id="year-to" type="number" inputmode="numeric" placeholder="to">
+      </div>
+      <div class="panel-actions"><button data-all="years">All</button><button data-none="years">None</button></div>
+      <div class="year-grid" id="year-grid"></div>
+    </div>
+  </div>
+
+  <div class="filter" id="f-topic">
+    <button class="tile">Topic <span class="count"></span><span class="chev">›</span></button>
+    <div class="panel"><div class="panel-actions"><button data-all="topics">All</button><button data-none="topics">None</button></div><div id="topic-panel"></div></div>
+  </div>
+
+  <div class="filter" id="f-view">
+    <button class="tile">View <span class="count"></span><span class="chev">›</span></button>
+    <div class="panel" id="view-panel"></div>
+  </div>
+
+  <button id="theme-btn" title="Switch light / dark mode"></button>
+</header>
+
+<div class="layout">
+  <nav>
+    <div class="nav-tools">
+      <button id="invert">invert year order</button>
+      <button id="randomize">randomize</button>
+      <button id="expand-all">expand all</button>
+    </div>
+    <div id="exams"></div>
+  </nav>
+  <main id="main"><p class="placeholder">Select a problem from the left.</p></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+// Data files are regenerated by the scripts in scripts/; the query string stops the
+// browser from reusing a stale cached copy after a rebuild.
+const fresh = `?t=${Date.now()}`;
+let questions = [];
+let loadError = null;
+try {
+  ({ default: questions } = await import(`./data/questions.js${fresh}`));
+} catch (err) {
+  loadError = err;
+}
+// Click boxes for (A)-(D), generated by scripts/extract_option_boxes.py. Optional:
+// without it every question falls back to plain A-D buttons.
+let optionBoxes = {};
+try {
+  ({ default: optionBoxes } = await import(`./data/option_boxes.js${fresh}`));
+} catch {}
+
+const TYPES = [
+  ["local", "Locals"],
+  ["national-I", "Nationals - I"],
+  ["national-II", "Nationals - II"],
+  ["national-III", "Nationals - III"],
+];
+const TYPE_LABEL = Object.fromEntries(TYPES);
+const TOPICS = [
+  "Stoichiometry/Solutions", "Descriptive/Laboratory", "States of Matter", "Thermodynamics",
+  "Kinetics", "Equilibrium", "Oxidation - Reduction", "Atomic Structure/Periodicity",
+  "Bonding/Molecular Structure", "Organic/Biochemistry",
+];
+// 2023 locals were published twice; the id prefix ("2023-original" / "2023-new") tells them apart.
+const VARIANT_LABEL = { original: "Original", new: "New" };
+const VARIANT_ORDER = { original: 0, new: 1 };
+
+// Group questions into exams keyed by exam type + id prefix.
+const examMap = new Map();
+for (const q of questions) {
+  const prefix = q.id.split("_")[0];
+  const variant = prefix.split("-")[1] || null;
+  const key = `${q.exam_type}|${prefix}`;
+  if (!examMap.has(key)) {
+    const label = `${q.year} ${TYPE_LABEL[q.exam_type] || q.exam_type}` +
+      (variant ? ` (${VARIANT_LABEL[variant] || variant})` : "");
+    examMap.set(key, { key, exam_type: q.exam_type, year: q.year, variant, label, questions: [] });
+  }
+  examMap.get(key).questions.push(q);
+}
+const allExams = [...examMap.values()];
+allExams.forEach(e => e.questions.sort((a, b) => a.number - b.number));
+const typeOrder = t => TYPES.findIndex(([k]) => k === t);
+const ALL_YEARS = [...new Set(allExams.map(e => e.year))].sort((a, b) => b - a);
+const TYPES_WITH_DATA = new Set(allExams.map(e => e.exam_type));
+const questionById = new Map(questions.map(q => [q.id, q]));
+
+// ---- State (filters/view persisted per browser as a convenience) ----
+const state = {
+  view: "chrono",
+  invert: false,
+  random: false,             // scrolling view: random picks instead of filter order
+  types: new Set(["local"]),
+  years: new Set(ALL_YEARS),
+  topics: new Set(TOPICS),
+  openExams: new Set(),
+  closedTopics: new Set(),   // topics are open by default inside an expanded exam
+  selectedId: null,
+};
+try {
+  const saved = JSON.parse(localStorage.getItem("usnco-state") || "null");
+  if (saved) {
+    // The view isn't restored: the page always opens in the chronological view.
+    state.invert = saved.invert ?? state.invert;
+    state.random = saved.random ?? state.random;
+    if (saved.types) state.types = new Set(saved.types);
+    if (saved.years) state.years = new Set(saved.years);
+    if (saved.topics) state.topics = new Set(saved.topics);
+  }
+} catch {}
+function save() {
+  try {
+    localStorage.setItem("usnco-state", JSON.stringify({
+      view: state.view, invert: state.invert, random: state.random,
+      types: [...state.types], years: [...state.years], topics: [...state.topics],
+    }));
+  } catch {}
+}
+
+function visibleExams() {
+  const dir = state.invert ? 1 : -1;
+  return allExams
+    .filter(e => state.types.has(e.exam_type) && state.years.has(e.year))
+    .map(e => ({ ...e, questions: e.questions.filter(q => state.topics.has(q.topic)) }))
+    .filter(e => e.questions.length)
+    .sort((a, b) => dir * (a.year - b.year)
+      || typeOrder(a.exam_type) - typeOrder(b.exam_type)
+      || (VARIANT_ORDER[a.variant] ?? 0) - (VARIANT_ORDER[b.variant] ?? 0));
+}
+
+// ---- Header filters ----
+const filters = [...document.querySelectorAll(".filter")];
+filters.forEach(f => {
+  f.querySelector(".tile").onclick = e => {
+    e.stopPropagation();
+    const wasOpen = f.classList.contains("open");
+    closePopups();
+    f.classList.toggle("open", !wasOpen);
+  };
+  f.querySelector(".panel").onclick = e => e.stopPropagation();
+});
+
+function toggle(set, value) { set.has(value) ? set.delete(value) : set.add(value); }
+
+function renderFilters() {
+  const typePanel = document.getElementById("type-panel");
+  typePanel.innerHTML = "";
+  for (const [key, label] of TYPES) {
+    const b = document.createElement("button");
+    b.className = "opt" + (state.types.has(key) ? " on" : "");
+    b.textContent = label + (TYPES_WITH_DATA.has(key) ? "" : " (no data)");
+    b.disabled = !TYPES_WITH_DATA.has(key);
+    b.onclick = () => { toggle(state.types, key); update(); };
+    typePanel.appendChild(b);
+  }
+
+  const grid = document.getElementById("year-grid");
+  grid.innerHTML = "";
+  for (const y of ALL_YEARS) {
+    const b = document.createElement("button");
+    b.className = "opt" + (state.years.has(y) ? " on" : "");
+    b.textContent = y;
+    b.onclick = () => { toggle(state.years, y); update(); };
+    grid.appendChild(b);
+  }
+
+  const topicPanel = document.getElementById("topic-panel");
+  topicPanel.innerHTML = "";
+  for (const t of TOPICS) {
+    const b = document.createElement("button");
+    b.className = "opt" + (state.topics.has(t) ? " on" : "");
+    b.textContent = t;
+    b.onclick = () => { toggle(state.topics, t); update(); };
+    topicPanel.appendChild(b);
+  }
+
+  const counts = { "f-type": [state.types.size, TYPES_WITH_DATA.size],
+                   "f-year": [state.years.size, ALL_YEARS.length],
+                   "f-topic": [state.topics.size, TOPICS.length] };
+  for (const [id, [n, total]] of Object.entries(counts))
+    document.querySelector(`#${id} .count`).textContent = n >= total ? "all" : n;
+}
+
+const ALL_VALUES = { types: () => [...TYPES_WITH_DATA], years: () => ALL_YEARS, topics: () => TOPICS };
+document.querySelectorAll("[data-all]").forEach(b =>
+  b.onclick = () => { state[b.dataset.all] = new Set(ALL_VALUES[b.dataset.all]()); update(); });
+document.querySelectorAll("[data-none]").forEach(b =>
+  b.onclick = () => { state[b.dataset.none] = new Set(); update(); });
+
+// Year range textboxes: when both ends are 4-digit years, select exactly that range.
+const yearFrom = document.getElementById("year-from");
+const yearTo = document.getElementById("year-to");
+function applyYearRange() {
+  if (!/^\d{4}$/.test(yearFrom.value) || !/^\d{4}$/.test(yearTo.value)) return;
+  const a = parseInt(yearFrom.value, 10), b = parseInt(yearTo.value, 10);
+  const [lo, hi] = a <= b ? [a, b] : [b, a];
+  state.years = new Set(ALL_YEARS.filter(y => y >= lo && y <= hi));
+  update();
+}
+yearFrom.addEventListener("input", applyYearRange);
+yearTo.addEventListener("input", applyYearRange);
+
+// ---- View dropdown ----
+const VIEWS = [["scroll", "Scrolling View"], ["chrono", "Chronological View"]];
+function renderViewPanel() {
+  const panel = document.getElementById("view-panel");
+  panel.innerHTML = "";
+  for (const [key, label] of VIEWS) {
+    const b = document.createElement("button");
+    b.className = "opt" + (state.view === key ? " on" : "");
+    b.textContent = label;
+    b.onclick = () => {
+      state.view = key;
+      document.getElementById("f-view").classList.remove("open");
+      renderedGroup = null;
+      update(questionById.get(state.selectedId));
+    };
+    panel.appendChild(b);
+  }
+  document.querySelector("#f-view .count").textContent = state.view === "chrono" ? "chronological" : "scrolling";
+}
+
+// ---- Light / dark mode (defaults to dark until the toggle is used) ----
+const themeBtn = document.getElementById("theme-btn");
+let theme = null;
+try { theme = localStorage.getItem("usnco-theme"); } catch {}
+function currentTheme() {
+  return theme || "dark";
+}
+function applyTheme() {
+  document.documentElement.dataset.theme = currentTheme();
+  themeBtn.textContent = currentTheme() === "dark" ? "☾ Dark" : "☀ Light";
+}
+themeBtn.onclick = () => {
+  theme = currentTheme() === "dark" ? "light" : "dark";
+  try { localStorage.setItem("usnco-theme", theme); } catch {}
+  applyTheme();
+};
+applyTheme();
+
+// ---- Sidebar ----
+const examsEl = document.getElementById("exams");
+const expandBtn = document.getElementById("expand-all");
+const invertBtn = document.getElementById("invert");
+
+const randomBtn = document.getElementById("randomize");
+
+invertBtn.onclick = () => { state.invert = !state.invert; update(); };
+randomBtn.onclick = () => { state.random = !state.random; update(); };
+
+const topicKey = (exam, topic) => `${exam.key}|${topic}`;
+
+function topicGroups(exam) {
+  const groups = new Map();
+  for (const q of exam.questions) {
+    if (!groups.has(q.topic)) groups.set(q.topic, []);
+    groups.get(q.topic).push(q);
+  }
+  return [...groups.entries()];
+}
+
+function allExpanded(exams) {
+  return exams.every(e => state.openExams.has(e.key) && (state.view !== "chrono" ||
+    topicGroups(e).every(([t]) => !state.closedTopics.has(topicKey(e, t)))));
+}
+
+expandBtn.onclick = () => {
+  const exams = sidebarExams();
+  const expand = !allExpanded(exams);
+  // Collapsing leaves the exam (and topic) of the current problem open.
+  const cur = questionById.get(state.selectedId);
+  const curExam = cur && examOf(cur).key;
+  for (const e of exams) {
+    const keep = !expand && e.key === curExam;
+    expand || keep ? state.openExams.add(e.key) : state.openExams.delete(e.key);
+    if (state.view === "chrono")
+      for (const [t] of topicGroups(e)) {
+        const keepTopic = keep && t === cur.topic;
+        expand || keepTopic ? state.closedTopics.delete(topicKey(e, t)) : state.closedTopics.add(topicKey(e, t));
+      }
+  }
+  renderSidebar();
+};
+
+// Chronological view lists every filtered exam; scrolling view lists only the loaded problems.
+function sidebarExams() {
+  if (state.view === "chrono") return visibleExams();
+  const groups = new Map();
+  for (const q of loadedProblems()) {
+    const e = examOf(q);
+    if (!groups.has(e.key)) groups.set(e.key, { ...e, questions: [] });
+    groups.get(e.key).questions.push(q);
+  }
+  return [...groups.values()];
+}
+
+let sidebarInitialized = false;
+function renderSidebar() {
+  const randomMode = state.view === "scroll" && state.random;
+  const exams = randomMode ? [] : sidebarExams();
+  // Open the first exam on first load only, so "collapse all" stays collapsed
+  if (!sidebarInitialized && exams.length) { state.openExams.add(exams[0].key); sidebarInitialized = true; }
+
+  randomBtn.hidden = state.view !== "scroll";
+  randomBtn.textContent = state.random ? "order" : "randomize";
+  invertBtn.disabled = expandBtn.disabled = randomMode;
+  examsEl.innerHTML = "";
+
+  // Randomize mode: just the loaded problems, numbered in the order drawn (no exam cards).
+  if (randomMode) {
+    const loaded = loadedProblems();
+    if (!loaded.length)
+      examsEl.innerHTML = '<p class="empty-nav">No problems match the selected filters.</p>';
+    const ul = document.createElement("ul");
+    ul.className = "problems flat";
+    loaded.forEach((q, i) => {
+      const li = document.createElement("li");
+      li.textContent = `Problem ${i + 1}`;
+      if (q.id === state.selectedId) li.className = "selected";
+      li.onclick = () => select(q);
+      ul.appendChild(li);
+    });
+    examsEl.appendChild(ul);
+    return;
+  }
+
+  if (!exams.length)
+    examsEl.innerHTML = '<p class="empty-nav">No exams match the selected filters.</p>';
+
+  for (const exam of exams) {
+    const section = document.createElement("section");
+    section.className = "exam" + (state.openExams.has(exam.key) ? " open" : "");
+    const head = document.createElement("button");
+    head.className = "exam-head";
+    head.innerHTML = `<span class="chev">›</span>${exam.label}`;
+    head.onclick = () => { toggle(state.openExams, exam.key); renderSidebar(); };
+    const body = document.createElement("div");
+    body.className = "exam-body";
+    section.append(head, body);
+
+    if (state.view === "chrono") {
+      for (const [topic, qs] of topicGroups(exam)) {
+        const tk = topicKey(exam, topic);
+        const div = document.createElement("div");
+        div.className = "topic" + (state.closedTopics.has(tk) ? "" : " open");
+        const th = document.createElement("button");
+        th.className = "topic-head" + (qs.some(q => q.id === state.selectedId) ? " has-selected" : "");
+        th.innerHTML = `<span class="chev" title="Expand / collapse">›</span>${topic}`;
+        // Topic name: expand it and open its problems in the pane.
+        // Arrow: expand + open, or collapse and clear its problems from the pane.
+        th.onclick = e => {
+          const collapsing = e.target.closest(".chev") && !state.closedTopics.has(tk);
+          if (collapsing) {
+            state.closedTopics.add(tk);
+            if (renderedGroup === `${exam.key}|${topic}`) clearPane();
+            renderSidebar();
+          } else {
+            state.closedTopics.delete(tk);
+            select(qs[0]);
+          }
+        };
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        for (const q of qs) {
+          const b = document.createElement("button");
+          b.textContent = q.number;
+          b.title = `Problem ${q.number}`;
+          if (q.id === state.selectedId) b.className = "selected";
+          b.onclick = () => select(q);
+          grid.appendChild(b);
+        }
+        div.append(th, grid);
+        body.appendChild(div);
+      }
+    } else {
+      const grid = document.createElement("div");
+      grid.className = "grid nums";
+      for (const q of exam.questions) {
+        const b = document.createElement("button");
+        b.textContent = q.number;
+        b.title = `Problem ${q.number}`;
+        if (q.id === state.selectedId) b.className = "selected";
+        b.onclick = () => select(q);
+        grid.appendChild(b);
+      }
+      body.appendChild(grid);
+    }
+    examsEl.appendChild(section);
+  }
+
+  expandBtn.textContent = exams.length && allExpanded(exams) ? "collapse all" : "expand all";
+  invertBtn.textContent = state.invert ? "newest first" : "invert year order";
+}
+
+// from: the problem to keep in view when switching views (scrolling view starts its stream there).
+function update(from = null) {
+  save();
+  renderFilters();
+  renderViewPanel();
+  if (state.view === "scroll") return startStream(from);
+  renderSidebar();
+  if (from) select(from);
+  else if (renderedGroup === "stream") clearPane();
+}
+
+const examOf = q => examMap.get(`${q.exam_type}|${q.id.split("_")[0]}`);
+
+function select(q) {
+  state.selectedId = q.id;
+  state.openExams.add(examOf(q).key);
+  renderSidebar();
+  state.view === "chrono" ? renderGroup(q) : renderStream(q);
+}
+
+// ---- Question / solution pane ----
+const mainEl = document.getElementById("main");
+const basename = p => p.split("/").pop();
+const imgs = paths => (paths || []).map(p => `<img src="${p}" alt="${basename(p)}">`).join("");
+
+// Per-question answering progress, kept while the page is open:
+// { picked: letter|null, wrong: Set, solved: bool, showSolution: bool, message: "" }
+const progress = new Map();
+const LETTERS = ["A", "B", "C", "D"];
+
+function progressFor(q) {
+  if (!progress.has(q.id))
+    progress.set(q.id, { picked: null, wrong: new Set(), solved: false, showSolution: false, message: "" });
+  return progress.get(q.id);
+}
+
+// hideIdentity: keep the exam / number / topic off the card until it's answered correctly.
+function buildTile(q, hideIdentity = false) {
+  const qImages = q.images?.image || [];
+  const solImages = q.solution?.image || [];
+  const exam = examOf(q);
+
+  const tile = document.createElement("div");
+  tile.className = "q-tile";
+  tile.dataset.id = q.id;
+  const identity = `${exam.label} — Problem ${q.number} · ${q.topic}`;
+  tile.innerHTML = `
+      <div class="card">
+        ${hideIdentity ? "" : `<h2>${identity}</h2>`}
+        <div class="q-images">
+          ${qImages.length
+            ? qImages.map(p => `<div class="q-img" data-path="${p}"><img src="${p}" alt="${basename(p)}"></div>`).join("")
+            : '<p class="empty">No question image.</p>'}
+        </div>
+        <div class="fallback-choices"></div>
+        <div class="answer-row">
+          <button class="solution-btn" ${solImages.length ? "" : "disabled"}>${solImages.length ? "Solution" : "Solution Unavailable"}</button>
+          <span class="status"></span>
+          <button class="submit-btn">Submit</button>
+        </div>
+        ${hideIdentity ? `<div class="identity">${identity}</div>` : ""}
+        <div class="solution">${imgs(solImages)}</div>
+      </div>
+      <div class="menu">
+        <button title="Options" aria-label="Options">⋮</button>
+        <div class="menu-list"></div>
+      </div>`;
+
+  // Overlay a box on each choice; any letter without a detected box gets a plain button.
+  const covered = new Set();
+  for (const wrap of tile.querySelectorAll(".q-img")) {
+    for (const b of optionBoxes[wrap.dataset.path] || []) {
+      if (covered.has(b.letter)) continue;
+      covered.add(b.letter);
+      wrap.insertAdjacentHTML("beforeend",
+        `<button class="choice" data-letter="${b.letter}" aria-label="Choice ${b.letter}"
+          style="left:${b.x * 100}%;top:${b.y * 100}%;width:${b.w * 100}%;height:${b.h * 100}%"></button>`);
+    }
+  }
+  const fallback = tile.querySelector(".fallback-choices");
+  for (const letter of LETTERS.filter(l => !covered.has(l)))
+    fallback.insertAdjacentHTML("beforeend", `<button class="choice" data-letter="${letter}">(${letter})</button>`);
+
+  const answers = (q.answer || "").split(",").map(a => a.trim()).filter(Boolean);
+  const st = progressFor(q);
+  const card = tile.querySelector(".card");
+  const status = card.querySelector(".status");
+  const submitBtn = card.querySelector(".submit-btn");
+  const solutionBtn = card.querySelector(".solution-btn");
+  const solutionEl = card.querySelector(".solution");
+  const identityEl = card.querySelector(".identity");
+
+  function paint() {
+    card.classList.toggle("locked", st.solved);
+    for (const c of card.querySelectorAll(".choice")) {
+      const l = c.dataset.letter;
+      c.classList.toggle("wrong", st.wrong.has(l));
+      c.classList.toggle("right", st.solved && st.picked === l);
+      c.classList.toggle("picked", !st.solved && st.picked === l);
+    }
+    status.textContent = st.message;
+    status.className = "status " + ({ "Correct!": "correct", "Incorrect!": "incorrect" }[st.message] || "prompt");
+    submitBtn.textContent = st.solved ? "Reset" : "Submit";
+    solutionBtn.style.visibility = st.solved ? "visible" : "hidden";
+    solutionBtn.classList.toggle("active", st.showSolution);
+    solutionEl.hidden = !(st.solved && st.showSolution && solImages.length);
+    if (identityEl) identityEl.hidden = !st.solved;
+  }
+
+  card.querySelectorAll(".choice").forEach(c => c.onclick = () => {
+    const l = c.dataset.letter;
+    if (st.solved || st.wrong.has(l)) return;
+    st.picked = st.picked === l ? null : l;
+    paint();
+  });
+
+  submitBtn.onclick = () => {
+    if (st.solved) {
+      Object.assign(st, { picked: null, wrong: new Set(), solved: false, showSolution: false, message: "" });
+    } else if (!answers.length) {
+      st.message = "No answer key for this question";
+    } else if (!st.picked) {
+      st.message = "Select an Answer";
+    } else if (answers.includes(st.picked)) {
+      st.solved = true;
+      st.message = "Correct!";
+    } else {
+      st.wrong.add(st.picked);
+      st.picked = null;
+      st.message = "Incorrect!";
+    }
+    paint();
+  };
+
+  solutionBtn.onclick = () => { st.showSolution = !st.showSolution; paint(); };
+  paint();
+
+  // Dropdown: one entry per path in images.image, images.question_image, solution.image
+  const menu = tile.querySelector(".menu");
+  const list = menu.querySelector(".menu-list");
+  const groups = [
+    ["Copy Image", qImages],
+    ["Copy Question Only", q.images?.question_image || []],
+    ["Copy Solution", solImages],
+  ];
+  for (const [label, paths] of groups) {
+    paths.forEach((p, i) => {
+      const b = document.createElement("button");
+      // Number the entries only when a list has more than one image (e.g. split questions).
+      const n = paths.length > 1 ? ` (${i + 1})` : "";
+      b.innerHTML = `${label}${n}<span class="path">${p}</span>`;
+      b.onclick = () => { menu.classList.remove("open"); copyImage(p); };
+      list.appendChild(b);
+    });
+  }
+  menu.querySelector("button").onclick = e => {
+    e.stopPropagation();
+    const wasOpen = menu.classList.contains("open");
+    closePopups();
+    menu.classList.toggle("open", !wasOpen);
+  };
+
+  // Interacting with a tile makes it the selected problem in the sidebar.
+  tile.addEventListener("click", () => {
+    if (state.selectedId === q.id) return;
+    state.selectedId = q.id;
+    markCurrent();
+    renderSidebar();
+  });
+  return tile;
+}
+
+let renderedGroup = null;   // "<exam>|<topic>" in chronological view, "stream" in scrolling view
+function clearPane() {
+  renderedGroup = null;
+  state.selectedId = null;
+  mainEl.innerHTML = '<p class="placeholder">Select a problem from the left.</p>';
+}
+function markCurrent() {
+  for (const t of mainEl.querySelectorAll(".q-tile"))
+    t.classList.toggle("current", t.dataset.id === state.selectedId);
+}
+
+// Show every problem in q's exam that shares its topic (six per topic on a full exam),
+// one tile each, and scroll to q. Re-selecting within the same group only scrolls.
+function renderGroup(q) {
+  const exam = examOf(q);
+  const groupKey = `${exam.key}|${q.topic}`;
+  if (renderedGroup !== groupKey) {
+    renderedGroup = groupKey;
+    const pane = document.createElement("div");
+    pane.className = "pane-wrap";
+    for (const other of exam.questions.filter(o => o.topic === q.topic)) pane.appendChild(buildTile(other));
+    mainEl.replaceChildren(pane);
+  }
+  scrollToTile(q);
+}
+
+function scrollToTile(q) {
+  markCurrent();
+  // Wait for the images so tiles above have their real height before scrolling,
+  // and keep the scroll tracker from re-picking a tile while the jump happens.
+  const target = mainEl.querySelector(`.q-tile[data-id="${q.id}"]`);
+  spyPausedUntil = Infinity;
+  Promise.all([...mainEl.querySelectorAll("img")].map(i => i.decode().catch(() => {})))
+    .then(() => {
+      if (state.selectedId === q.id) target?.scrollIntoView({ block: "start" });
+      spyPausedUntil = performance.now() + 300;
+    });
+}
+
+// ---- Scrolling view: a continuous stream of problems, STREAM_PAGE at a time ----
+// Order mode follows the filters + year order; randomize mode draws from a shuffled pool.
+const STREAM_PAGE = 15;
+let streamList = [];
+let streamEnd = 0;
+const loadedProblems = () => (renderedGroup === "stream" ? streamList.slice(0, streamEnd) : []);
+
+function shuffle(list) {
+  const a = [...list];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderStream(q) {
+  if (renderedGroup === "stream" && mainEl.querySelector(`.q-tile[data-id="${q.id}"]`))
+    return scrollToTile(q);
+  startStream(q);
+}
+
+// Rebuild the stream: in order mode it starts at `from` (or the first filtered problem).
+function startStream(from) {
+  renderedGroup = "stream";
+  const pool = visibleExams().flatMap(e => e.questions);
+  streamList = state.random ? shuffle(pool)
+    : pool.slice(Math.max(0, pool.findIndex(o => o.id === from?.id)));
+  streamEnd = 0;
+  state.selectedId = streamList[0]?.id ?? null;
+  if (!streamList.length) {
+    mainEl.innerHTML = '<p class="placeholder">No problems match the selected filters.</p>';
+    renderSidebar();
+    return;
+  }
+  state.openExams.add(examOf(streamList[0]).key);
+  const pane = document.createElement("div");
+  pane.className = "pane-wrap";
+  pane.innerHTML = '<div class="stream-tiles"></div><div class="load-more"></div>';
+  mainEl.replaceChildren(pane);
+  loadMore();
+  scrollTo(0, 0);
+}
+
+function loadMore() {
+  const tiles = mainEl.querySelector(".stream-tiles");
+  const next = streamList.slice(streamEnd, streamEnd + STREAM_PAGE);
+  for (const o of next) tiles.appendChild(buildTile(o, state.random));
+  streamEnd += next.length;
+  renderSidebar();
+  const footer = mainEl.querySelector(".load-more");
+  const left = streamList.length - streamEnd;
+  footer.innerHTML = left
+    ? `<button>Load More (${Math.min(STREAM_PAGE, left)} of ${left} remaining)</button>`
+    : '<p class="empty">End of problems.</p>';
+  footer.querySelector("button")?.addEventListener("click", loadMore);
+  markCurrent();
+}
+
+// ---- Scroll tracking: the tile at the top of the pane becomes the current problem ----
+let spyPausedUntil = 0;
+let spyQueued = false;
+const nav = document.querySelector("nav");
+
+function trackScroll() {
+  spyQueued = false;
+  if (performance.now() < spyPausedUntil) return;
+  const tiles = [...mainEl.querySelectorAll(".q-tile")];
+  if (!tiles.length) return;
+  // The tile crossing a line ~30% down the visible pane is the one being read.
+  const headerH = document.querySelector("header").offsetHeight;
+  const line = headerH + (innerHeight - headerH) * 0.3;
+  let current = tiles[0];
+  for (const t of tiles) {
+    if (t.getBoundingClientRect().top <= line) current = t;
+    else break;
+  }
+  // At the very bottom the last tiles can't reach the line; pick the last one.
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) current = tiles[tiles.length - 1];
+  if (current.dataset.id === state.selectedId) return;
+
+  const q = questionById.get(current.dataset.id);
+  state.selectedId = q.id;
+  state.openExams.add(examOf(q).key);   // expand the year once the pane reaches it
+  markCurrent();
+  renderSidebar();
+  revealInSidebar();
+}
+
+function revealInSidebar() {
+  const el = nav.querySelector(".problems li.selected, .grid button.selected");
+  if (!el) return;
+  const top = el.getBoundingClientRect().top - nav.getBoundingClientRect().top;
+  const toolsH = nav.querySelector(".nav-tools").offsetHeight;
+  if (top < toolsH || top > nav.clientHeight - el.offsetHeight)
+    nav.scrollTop += top - nav.clientHeight / 2;
+}
+
+addEventListener("scroll", () => {
+  if (!spyQueued) { spyQueued = true; requestAnimationFrame(trackScroll); }
+}, { passive: true });
+
+function closePopups() {
+  document.querySelectorAll(".filter.open, .menu.open").forEach(el => el.classList.remove("open"));
+}
+document.addEventListener("click", e => {
+  document.querySelectorAll(".filter.open, .menu.open").forEach(el => {
+    if (!el.contains(e.target)) el.classList.remove("open");
+  });
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closePopups(); });
+
+async function copyImage(path) {
+  try {
+    const blob = fetch(path).then(r => {
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r.blob();
+    }).then(b => b.type === "image/png" ? b : new Blob([b], { type: "image/png" }));
+    // Passing the promise keeps Safari's user-gesture requirement satisfied
+    await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+    toast(`Copied ${basename(path)}`);
+  } catch (err) {
+    toast(`Copy failed: ${err.message}`);
+  }
+}
+
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+update();
+if (loadError) {
+  mainEl.innerHTML = `<div class="banner"><strong>Couldn't load the question data.</strong>
+    <p>Browsers block this page from reading <code>data/questions.js</code> when it's opened directly as a file.
+    Double-click <code>start.command</code> in the USNCO folder, or run <code>python3 -m http.server 8000</code>
+    there and open <code>http://localhost:8000</code>.</p></div>`;
+}
+</script>
+</body>
+</html>
